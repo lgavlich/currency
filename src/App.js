@@ -12,13 +12,14 @@ function App() {
   const [fromPrice, setFromPrice] = useState(0)
   const [toPrice, setToPrice] = useState(0)
 
-  const [rate, setRate] = useState({});
+  const [buy, setBuy] = useState({});
+  console.log(buy)
   useEffect(()=>{
-    fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
+    fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
     .then((res)=>{return res.json()}
     )
     .then((data) =>  {
-      setRate(data)
+      setBuy(data)
       console.log(data)})
 
     .catch(err =>{
@@ -27,13 +28,13 @@ function App() {
   },[])
 
 const onChangePrice = (value) => {
-  const price = value/rate[fromCurrency];
-  const result = price * rate[toCurrency];
+  const price = value/buy[fromCurrency];
+  const result = price * buy[toCurrency];
   setToPrice(result);
   setFromPrice(value);
 }
 const onChangeToPrice = (value) =>{
-  const result = (rate[fromCurrency]/rate[toCurrency])*value
+  const result = (buy[fromCurrency] / buy[toCurrency])*value
   setFromPrice(result)
   setToPrice(value)
 }
