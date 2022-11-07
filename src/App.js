@@ -27,10 +27,10 @@ function App() {
   },[])
 
 const onChangePrice = (value) => {
-  const price = value/rate[fromCurrency]
-  const result = price * rate[toCurrency]
-  setToPrice(result)
-  setFromPrice(value)
+  const price = value/rate[fromCurrency];
+  const result = price * rate[toCurrency];
+  setToPrice(result);
+  setFromPrice(value);
 }
 const onChangeToPrice = (value) =>{
   const result = (rate[fromCurrency]/rate[toCurrency])*value
