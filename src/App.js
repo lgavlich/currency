@@ -1,8 +1,8 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
 import {MainPage} from './components/MainPage'
-import {Footer} from './components/Footer'
+import Header from './components/Header';
 import './index.scss'
 import { useEffect,useState } from 'react';
+import  {BrowserRouter}  from 'react-router-dom'
 
 
 
@@ -12,15 +12,15 @@ function App() {
   const [fromPrice, setFromPrice] = useState(0)
   const [toPrice, setToPrice] = useState(0)
 
-  const [buy, setBuy] = useState({});
-  console.log(buy)
-  useEffect(()=>{
+  const [rate, setRate] = useState({});
+    useEffect(()=>{
     fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
     .then((res)=>{return res.json()}
     )
     .then((data) =>  {
-      setBuy(data)
-      console.log(data)})
+      setRate(data)
+     // console.log(data)
+    })
 
     .catch(err =>{
       alert('Не вдалося отримати дані');
@@ -28,21 +28,23 @@ function App() {
   },[])
 
 const onChangePrice = (value) => {
-  const price = value/buy[fromCurrency];
-  const result = price * buy[toCurrency];
+  const price = value/rate[fromCurrency];
+  const result = price * rate[toCurrency];
   setToPrice(result);
   setFromPrice(value);
 }
 const onChangeToPrice = (value) =>{
-  const result = (buy[fromCurrency] / buy[toCurrency])*value
+  const result = (rate[fromCurrency] / rate[toCurrency])*value
   setFromPrice(result)
   setToPrice(value)
 }
 
   return (
-   <>
-   <div style = {{display:'flex', marginTop:"100px",marginBottom:'150px'}}>
-    <MainPage 
+ 
+    <BrowserRouter>
+      <Header/>
+      <div style = {{display:'flex', marginTop:"100px",marginBottom:'150px'}}>
+      <MainPage 
     value={fromPrice}
      cyrrency ={fromCurrency} 
      //onChangeCurrency={(cur)=> console.log(cur)}
@@ -58,8 +60,9 @@ const onChangeToPrice = (value) =>{
     onChangeValue={onChangeToPrice}
     />
    </div>
-    <Footer/>
-    </>
+  
+   </BrowserRouter>
+    
   );
 }
 
