@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -32,15 +33,6 @@ li {
   cursor: pointer;
   justify-content: center;
   
-
-  &:hover {
-    background-color:  #16b67f;
-  }
-
-  &:active {
-    background-color:bisque;
-  }
-
   }
 
 .currencies{

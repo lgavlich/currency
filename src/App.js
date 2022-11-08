@@ -1,6 +1,6 @@
 import {MainPage} from './components/MainPage'
 import Header from './components/Header';
-import './index.scss'
+import './index.css'
 import { useEffect,useState } from 'react';
 import  {BrowserRouter}  from 'react-router-dom'
 
@@ -43,7 +43,7 @@ const onChangeToPrice = (value) =>{
  
     <BrowserRouter>
       <Header/>
-      <div style = {{display:'flex', marginTop:"100px",marginBottom:'150px'}}>
+      <div style = {{display:'flex',justifyContent:"center", marginTop:"100px"}}>
       <MainPage 
     value={fromPrice}
      cyrrency ={fromCurrency} 
